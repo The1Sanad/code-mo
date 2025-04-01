@@ -1,0 +1,45 @@
+/* Theme styles for light and dark mode */
+
+/* Light theme overrides */
+.light-theme {
+  /* Background colors */
+  --bg-primary: theme('colors.light.bg.primary');
+  --bg-secondary: theme('colors.light.bg.secondary');
+  --bg-tertiary: theme('colors.light.bg.tertiary');
+  
+  /* Text colors */
+  --text-primary: theme('colors.light.text.primary');
+  --text-secondary: theme('colors.light.text.secondary');
+  --text-accent: theme('colors.light.text.accent');
+  
+  /* Border colors */
+  --border-primary: theme('colors.light.border.primary');
+  --border-secondary: theme('colors.light.border.secondary');
+  --border-accent: theme('colors.light.border.accent');
+  
+  /* Accent colors */
+  --accent-blue-primary: theme('colors.light.accent.blue.primary');
+  --accent-blue-secondary: theme('colors.light.accent.blue.secondary');
+  --accent-blue-light: theme('colors.light.accent.blue.light');
+  --accent-purple-primary: theme('colors.light.accent.purple.primary');
+  --accent-purple-secondary: theme('colors.light.accent.purple.secondary');
+  --accent-purple-light: theme('colors.light.accent.purple.light');
+}
+
+/* Dark theme is the default, but we define variables for consistency */
+.dark-theme {
+  /* Background colors */
+  --bg-primary: theme('colors.gray.900');
+  --bg-secondary: theme('colors.gray.800');
+  --bg-tertiary: theme('colors.gray.700');
+  
+  /* Text colors */
+  --text-primary: theme('colors.white');
+  --text-secondary: theme('colors.gray.300');
+  --text-accent: theme('colors.blue.500');
+  
+  /* Border colors */
+  --border-primary: theme('colors.gray.800');
+  --border-secondary: theme('colors.gray.700');
+  --border-accent: theme('colors.blue.700');
+}
