@@ -12,12 +12,14 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "@types/marked": "^6.0.0",
     "cron-parser": "^4.9.0",
     "crypto-js": "^4.2.0",
     "diff": "^5.2.0",
     "jsonwebtoken": "^9.0.2",
     "jwt-decode": "^4.0.0",
     "lucide-react": "^0.344.0",
+    "marked": "^15.0.7",
     "php-serialize": "^4.1.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -29,6 +31,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.9.1",
+    "@tailwindcss/typography": "^0.5.16",
     "@types/crypto-js": "^4.2.2",
     "@types/diff": "^5.0.9",
     "@types/jsonwebtoken": "^9.0.6",

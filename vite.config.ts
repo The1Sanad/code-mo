@@ -7,5 +7,5 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['lucide-react'],
   },
-  base: '/devutils/', // Replace 'devutils' with your repository name
+  base: '/', // Running at root path
 });

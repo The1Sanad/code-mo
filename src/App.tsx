@@ -27,6 +27,7 @@ const CronJobParser = lazyLoad(() => import('./tools/CronJobParser'));
 const PhpSerializer = lazyLoad(() => import('./tools/PhpSerializer'));
 const TextDiffChecker = lazyLoad(() => import('./tools/TextDiffChecker'));
 const YamlToJson = lazyLoad(() => import('./tools/YamlToJson'));
+const MarkdownEditor = lazyLoad(() => import('./tools/MarkdownEditor'));
 
 function App() {
   return (
@@ -55,6 +56,7 @@ function App() {
                 <Route path="php" element={<PhpSerializer />} />
                 <Route path="diff" element={<TextDiffChecker />} />
                 <Route path="yaml" element={<YamlToJson />} />
+                <Route path="markdown" element={<MarkdownEditor />} />
               </Route>
               <Route path="*" element={<NotFound />} />
             </Route>

@@ -47,6 +47,7 @@ export const toolCategories = [
       { name: "HTML Preview", path: "/tools/html-preview" },
       { name: "String Case Converter", path: "/tools/case" },
       { name: "Text Diff Checker", path: "/tools/diff" },
+      { name: "Markdown Editor", path: "/tools/markdown" },
     ]
   },
 ] as const;
