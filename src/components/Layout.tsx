@@ -113,7 +113,7 @@ export default function Layout() {
             <div className="container mx-auto px-4 relative z-10">
               <div className="max-w-4xl mx-auto text-center">
                 <div className="inline-block bg-blue-500/10 text-blue-300 px-4 py-1 rounded-full text-sm font-medium mb-6">
-                  47+ Developer Tools • 100% Free • No Sign-up Required
+                  17+ Developer Tools • 100% Free • No Sign-up Required
                 </div>
                 
                 <h1 id="hero-heading" className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-500 to-blue-300 bg-clip-text text-transparent">
@@ -232,7 +232,7 @@ export default function Layout() {
                 
                 <div className="text-center mt-8">
                   <Link to="/tools" className="inline-flex items-center text-blue-500 hover:text-blue-400 transition">
-                    <span>View all 47+ developer tools</span>
+                    <span>View all 17+ developer tools</span>
                     <ChevronRight className="w-4 h-4 ml-1" />
                   </Link>
                 </div>
