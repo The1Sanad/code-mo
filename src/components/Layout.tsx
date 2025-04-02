@@ -53,6 +53,10 @@ export default function Layout() {
                 <Code className="w-4 h-4 mr-1" />
                 <span>Tools</span>
               </Link>
+              <Link to="/about" className="text-gray-300 hover:text-white transition flex items-center">
+                <Users className="w-4 h-4 mr-1" />
+                <span>About</span>
+              </Link>
               <Link to="/faqs" className="text-gray-300 hover:text-white transition flex items-center">
                 <CheckCircle className="w-4 h-4 mr-1" />
                 <span>FAQs</span>
@@ -90,6 +94,7 @@ export default function Layout() {
             <div className="md:hidden bg-gray-800 border-b border-gray-700 py-4">
               <div className="container mx-auto px-4 space-y-3">
                 <Link to="/tools" className="block text-gray-300 hover:text-white transition py-2" onClick={() => setMobileMenuOpen(false)}>Tools</Link>
+                <Link to="/about" className="block text-gray-300 hover:text-white transition py-2" onClick={() => setMobileMenuOpen(false)}>About</Link>
                 <Link to="/faqs" className="block text-gray-300 hover:text-white transition py-2" onClick={() => setMobileMenuOpen(false)}>FAQs</Link>
                 <Link to="/changelog" className="block text-gray-300 hover:text-white transition py-2" onClick={() => setMobileMenuOpen(false)}>Changelog</Link>
                 <a href="https://github.com/yourusername/code-mo" target="_blank" rel="noopener noreferrer" className="block text-gray-300 hover:text-white transition py-2">GitHub</a>

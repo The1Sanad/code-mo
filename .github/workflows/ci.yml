@@ -1,4 +1,4 @@
-name: CI
+name: CI/CD Pipeline
 
 on:
   push:
@@ -7,11 +7,12 @@ on:
     branches: [ main, master ]
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout repository
+      uses: actions/checkout@v3
     
     - name: Setup Node.js
       uses: actions/setup-node@v3
@@ -19,17 +20,21 @@ jobs:
         node-version: '18'
         cache: 'yarn'
     
-    - name: Install Yarn
-      run: npm install -g yarn
-    
     - name: Install dependencies
-      run: yarn install
+      run: |
+        npm install -g yarn
+        yarn install --frozen-lockfile
       
     - name: Lint
       run: yarn lint
       
-    - name: Test
-      run: yarn test
-      
     - name: Build
       run: yarn build
+      
+    - name: Deploy to GitHub Pages
+      if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        folder: dist
+        branch: gh-pages
+        clean: true

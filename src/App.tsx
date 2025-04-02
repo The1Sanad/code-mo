@@ -8,6 +8,7 @@ import { lazyLoad, LoadingFallback } from './utils/lazyLoad';
 
 // Lazy load pages and tools to improve performance
 const Faq = lazyLoad(() => import('./pages/Faq'));
+const About = lazyLoad(() => import('./pages/About'));
 const NotFound = lazyLoad(() => import('./pages/NotFound'));
 
 // Lazy load all tools
@@ -38,6 +39,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index element={null} />
+              <Route path="about" element={<About />} />
               <Route path="faqs" element={<Faq />} />
               <Route path="tools">
                 <Route path="json" element={<JsonFormatter />} />
