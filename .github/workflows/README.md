@@ -42,3 +42,16 @@ If the workflow fails, check:
 - The workflow logs in the GitHub Actions tab
 - That all required secrets are set in the repository settings
 - That the build process completes successfully
+
+## Required Secrets
+
+### DEPLOY_TOKEN
+This repository requires a `DEPLOY_TOKEN` secret to be set up for GitHub Pages deployment:
+
+1. Go to your GitHub account settings → Developer settings → Personal access tokens → Tokens (classic)
+2. Generate a new token with the `repo` scope (or at minimum `public_repo` for public repositories)
+3. Copy the generated token
+4. Go to your repository settings → Secrets and variables → Actions
+5. Create a new repository secret named `DEPLOY_TOKEN` and paste your token as the value
+
+This token allows the GitHub Actions workflow to push to the repository during the deployment process.

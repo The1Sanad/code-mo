@@ -36,3 +36,6 @@ jobs:
         folder: dist
         branch: gh-pages
         clean: true
+        token: ${{ secrets.DEPLOY_TOKEN }}
+        # Using a custom token with repo scope instead of GITHUB_TOKEN
+        # This resolves the 403 permission error during deployment
