@@ -20,7 +20,7 @@ export default function About() {
             {/* Profile image */}
             <div className="aspect-square bg-gray-700 overflow-hidden">
               <img 
-                src="/images/mohammed-ismaeel.svg" 
+                src="/images/mohammed-ismaeel.jpg" 
                 alt="Mohammed Ismaeel" 
                 className="w-full h-full object-cover"
               />  
