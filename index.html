@@ -32,8 +32,17 @@
           var decoded = l.search.slice(1).split('&').map(function(s) { 
             return s.replace(/~and~/g, '&')
           }).join('?');
-          window.history.replaceState(null, null,
-              l.pathname.slice(0, -1) + decoded + l.hash
+          
+          // Ensure we don't create malformed URLs
+          if (decoded.indexOf('?') === -1 && decoded.indexOf('=') !== -1) {
+            // If there's no ? but there is a =, it's likely a query param without proper formatting
+            decoded = '?' + decoded;
+          }
+          
+          window.history.replaceState(
+            null, 
+            null,
+            l.pathname.slice(0, -1) + decoded + l.hash
           );
         }
       }(window.location))
