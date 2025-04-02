@@ -68,13 +68,12 @@ function getErrorContext(jsonString: string, position: number): string {
   
   // Get the line content for better context
   const lines = jsonString.split('\n');
-  const errorLine = lines[line - 1] || '';
   
   // Get surrounding lines for context
   const startLine = Math.max(0, line - 2);
   const endLine = Math.min(lines.length, line + 2);
   
-  let contextLines = [];
+  const contextLines = [];
   for (let i = startLine; i < endLine; i++) {
     const lineNumber = i + 1;
     const isErrorLine = lineNumber === line;
