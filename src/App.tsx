@@ -4,6 +4,7 @@ import { AppProvider } from './context/AppContext';
 import ErrorBoundary from './components/ErrorBoundary';
 import Layout from './components/Layout';
 import NotificationContainer from './components/NotificationContainer';
+import ScrollBehavior from './components/ScrollBehavior';
 import { lazyLoad } from './utils/lazyLoad';
 
 // Lazy load pages and tools to improve performance
@@ -19,6 +20,7 @@ const RegExpTester = lazyLoad(() => import('./tools/RegExpTester'));
 const UrlEncoder = lazyLoad(() => import('./tools/UrlEncoder'));
 const HtmlEncoder = lazyLoad(() => import('./tools/HtmlEncoder'));
 const BackslashEscape = lazyLoad(() => import('./tools/BackslashEscape'));
+const JsonEscape = lazyLoad(() => import('./tools/JsonEscape'));
 const UuidGenerator = lazyLoad(() => import('./tools/UuidGenerator'));
 const HtmlPreview = lazyLoad(() => import('./tools/HtmlPreview'));
 const HashGenerator = lazyLoad(() => import('./tools/HashGenerator'));
@@ -35,6 +37,7 @@ function App() {
     <ErrorBoundary>
       <AppProvider>
         <BrowserRouter>
+          <ScrollBehavior />
           <NotificationContainer />
           <Routes>
             <Route path="/" element={<Layout />}>
@@ -49,6 +52,7 @@ function App() {
                 <Route path="url" element={<UrlEncoder />} />
                 <Route path="html" element={<HtmlEncoder />} />
                 <Route path="escape" element={<BackslashEscape />} />
+                <Route path="json-escape" element={<JsonEscape />} />
                 <Route path="uuid" element={<UuidGenerator />} />
                 <Route path="html-preview" element={<HtmlPreview />} />
                 <Route path="hash" element={<HashGenerator />} />

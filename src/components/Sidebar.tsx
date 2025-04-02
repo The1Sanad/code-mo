@@ -20,6 +20,7 @@ export const toolCategories = [
       { name: "URL Encode/Decode", path: "/tools/url" },
       { name: "HTML Entity Encode/Decode", path: "/tools/html" },
       { name: "Backslash Escape/Unescape", path: "/tools/escape" },
+      { name: "JSON Escape/Unescape", path: "/tools/json-escape" },
       { name: "PHP Serializer", path: "/tools/php" },
     ]
   },
