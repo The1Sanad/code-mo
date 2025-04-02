@@ -1,10 +1,10 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AppProvider } from './context/AppContext';
 import ErrorBoundary from './components/ErrorBoundary';
 import Layout from './components/Layout';
 import NotificationContainer from './components/NotificationContainer';
-import { lazyLoad, LoadingFallback } from './utils/lazyLoad';
+import { lazyLoad } from './utils/lazyLoad';
 
 // Lazy load pages and tools to improve performance
 const Faq = lazyLoad(() => import('./pages/Faq'));

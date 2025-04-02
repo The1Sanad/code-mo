@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Clipboard, Trash2, Copy, RotateCcw } from 'lucide-react';
 
 export default function BackslashEscape() {
@@ -39,7 +39,7 @@ export default function BackslashEscape() {
       } else {
         setOutput(unescapeString(input));
       }
-    } catch (err) {
+    } catch  {
       setOutput(mode === 'unescape' ? 'Invalid escaped string' : 'Cannot escape this input');
     }
   }, [input, mode]);

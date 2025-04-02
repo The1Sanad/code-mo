@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Clipboard, Trash2 } from 'lucide-react';
+import { Trash2 } from 'lucide-react';
 import { diffLines, Change } from 'diff';
 
 export default function TextDiffChecker() {
@@ -7,9 +7,9 @@ export default function TextDiffChecker() {
   const [text2, setText2] = useState('');
   const [diff, setDiff] = useState<Change[]>([]);
 
-  const handleCopy = (text: string) => {
-    navigator.clipboard.writeText(text);
-  };
+  // const handleCopy = (text: string) => {
+  //   navigator.clipboard.writeText(text);
+  // };
 
   const handleClear = () => {
     setText1('');

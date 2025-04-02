@@ -1,5 +1,5 @@
 import React from 'react';
-import { Terminal, Star, Shield, Zap, CheckCircle, Users, Clock, Code, Menu, X, Github, Twitter, ExternalLink, Heart, Coffee, ChevronRight } from 'lucide-react';
+import { Terminal, Star, Shield, Zap, CheckCircle, Users, Clock, Code, Menu, X, Github, Twitter, Heart, ChevronRight } from 'lucide-react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import Sidebar from './Sidebar';

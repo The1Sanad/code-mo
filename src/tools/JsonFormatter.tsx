@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { Clipboard, Trash2, Copy, AlertCircle, CheckCircle } from 'lucide-react';
+import { useEffect } from 'react';
+import { Clipboard, Trash2, Copy } from 'lucide-react';
 import { useToolState } from '../hooks/useToolState';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import { useToolAnalytics } from '../hooks/useToolAnalytics';
 import { useAppContext } from '../context/AppContext';
-import { safeJsonParse, formatErrorMessage } from '../utils/errorHandling';
+import { safeJsonParse } from '../utils/errorHandling';
 import { createStorageKey } from '../utils/storage';
 import { debounce } from '../utils/performance';
 
@@ -52,8 +52,8 @@ export default function JsonFormatter() {
     });
   };
 
-  // Create a debounced version of the parse function to avoid excessive processing
-  const debouncedParse = debounce(() => {
+  // Parse JSON with debounce to avoid performance issues with large inputs
+  const debouncedParse = debounce((input: string) => {
     if (!input.trim()) {
       actions.setData({
         output: '',
@@ -63,30 +63,36 @@ export default function JsonFormatter() {
     }
 
     try {
-      const parsed = safeJsonParse(input);
-      const formatted = JSON.stringify(parsed, null, 2);
-      
+      const result = safeJsonParse(input);
+      if (result.success) {
+        const formatted = JSON.stringify(result.data, null, 2);
+        actions.setData({
+          output: formatted,
+          isValid: true
+        });
+        trackSuccess('format');
+      } else {
+        actions.setData({
+          output: result.error,
+          isValid: false
+        });
+        trackError(new Error(result.error), 'format');
+      }
+    } catch (error) {
+      // Fallback for any unexpected errors
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error parsing JSON';
       actions.setData({
-        output: formatted,
-        isValid: true
-      });
-      
-      trackSuccess('format');
-    } catch (err) {
-      actions.setData({
-        output: input,
+        output: errorMessage,
         isValid: false
       });
-      
-      actions.setError(err);
-      trackError(err, 'format');
+      trackError(error instanceof Error ? error : new Error(errorMessage), 'format');
     }
   }, 300);
 
-  // Run the parser when input changes
+  // Parse input when it changes
   useEffect(() => {
-    debouncedParse();
-  }, [input]);
+    debouncedParse(input);
+  }, [input, debouncedParse]);
 
   return (
     <div className="bg-gray-900 rounded-lg p-4">
@@ -129,9 +135,16 @@ export default function JsonFormatter() {
           {state.error ? (
             <div className="text-red-400 text-sm font-mono">{state.error}</div>
           ) : (
-            <pre className={`text-sm font-mono ${state.data.isValid ? 'text-green-400' : 'text-red-400'}`}>
-              {state.data.output}
-            </pre>
+            <div className="relative">
+              <pre className={`text-sm font-mono ${state.data.isValid ? 'text-green-400' : 'text-red-400'} whitespace-pre-wrap`}>
+                {state.data.output}
+              </pre>
+              {!state.data.isValid && state.data.output && (
+                <div className="absolute top-2 right-2 bg-red-500/20 text-red-400 text-xs px-2 py-1 rounded">
+                  Invalid JSON
+                </div>
+              )}
+            </div>
           )}
           {state.data.isValid && (
             <div className="absolute top-2 right-2 bg-green-500/20 text-green-400 text-xs px-2 py-1 rounded">

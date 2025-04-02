@@ -62,7 +62,7 @@ export function mockLocalStorage() {
  * @param response - The response to return from fetch
  * @returns A mock fetch function
  */
-export function mockFetch(response: any) {
+export function mockFetch(response: unknown) {
   return jest.fn().mockImplementation(() =>
     Promise.resolve({
       ok: true,

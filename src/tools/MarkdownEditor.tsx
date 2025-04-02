@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Clipboard, Trash2, Copy, Download, FileText } from 'lucide-react';
 import { marked } from 'marked';
 import { useToolState } from '../hooks/useToolState';
@@ -90,8 +90,8 @@ export default function MarkdownEditor() {
     }
   };
 
-  // Create a debounced version of the parse function to avoid excessive processing
-  const debouncedParse = debounce(() => {
+  // Parse markdown with debounce to avoid performance issues with large inputs
+  const debouncedParse = debounce((markdown: string) => {
     if (!markdown.trim()) {
       actions.setData({
         html: '',
@@ -101,32 +101,25 @@ export default function MarkdownEditor() {
     }
 
     try {
-      // Parse markdown to HTML
       const html = marked(markdown);
-      
-      // Calculate word count
-      const wordCount = markdown
-        .replace(/\s+/g, ' ')
-        .split(' ')
-        .filter(word => word.length > 0)
-        .length;
+      const wordCount = markdown.split(/\s+/).filter(Boolean).length;
       
       actions.setData({
         html,
         wordCount
       });
       
-      trackSuccess('render');
-    } catch (err) {
-      actions.setError(err);
-      trackError(err, 'render');
+      trackSuccess('parse');
+    } catch (error) {
+      console.error('Error parsing markdown:', error);
+      trackError(error instanceof Error ? error : new Error('Unknown error'), 'parse');
     }
   }, 300);
 
-  // Run the parser when markdown changes
+  // Parse markdown when it changes
   useEffect(() => {
-    debouncedParse();
-  }, [markdown]);
+    debouncedParse(markdown);
+  }, [markdown, debouncedParse]);
 
   // Insert markdown formatting
   const insertFormatting = (format: string) => {

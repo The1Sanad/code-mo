@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Clipboard, Trash2, Copy } from 'lucide-react';
 import { jwtDecode } from 'jwt-decode';
 
 interface JwtPayload {
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export default function JwtDebugger() {
@@ -37,7 +37,7 @@ export default function JwtDebugger() {
       setHeader(decoded);
       setPayload(payload);
       setError(null);
-    } catch (err) {
+    } catch {
       setHeader(null);
       setPayload(null);
       setError('Invalid JWT token');

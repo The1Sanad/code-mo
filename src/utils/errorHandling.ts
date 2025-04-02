@@ -26,37 +26,68 @@ export class ApiError extends Error {
  * @returns The parsed JSON object
  * @throws ValidationError with a user-friendly message
  */
-export function safeJsonParse<T>(jsonString: string): T {
+export function safeJsonParse<T>(jsonString: string): { success: true; data: T } | { success: false; error: string } {
   try {
-    return JSON.parse(jsonString) as T;
+    const data = JSON.parse(jsonString) as T;
+    return { success: true, data };
   } catch (error) {
     // Extract line and position from error message if available
     const errorMessage = (error as Error).message;
     const positionMatch = errorMessage.match(/position (\d+)/i);
     
+    let errorWithContext = `Invalid JSON: ${errorMessage}`;
+    
     if (positionMatch && positionMatch[1]) {
       const position = parseInt(positionMatch[1]);
       const errorContext = getErrorContext(jsonString, position);
-      throw new ValidationError(`Invalid JSON: ${errorMessage}\n${errorContext}`);
+      errorWithContext = `${errorWithContext}\n${errorContext}`;
     }
     
-    throw new ValidationError(`Invalid JSON: ${errorMessage}`);
+    return { success: false, error: errorWithContext };
   }
 }
 
 /**
- * Get context around the error position in the JSON string
+ * Get context around the error position in the JSON string with line and column information
  */
 function getErrorContext(jsonString: string, position: number): string {
-  const start = Math.max(0, position - 20);
-  const end = Math.min(jsonString.length, position + 20);
-  const context = jsonString.substring(start, end);
+  // Find line and column information
+  let line = 1;
+  let column = 1;
+  let currentPos = 0;
   
-  // Mark the error position with a caret
-  const caretPosition = position - start;
-  const caretLine = ' '.repeat(caretPosition) + '^';
+  while (currentPos < position && currentPos < jsonString.length) {
+    if (jsonString[currentPos] === '\n') {
+      line++;
+      column = 1;
+    } else {
+      column++;
+    }
+    currentPos++;
+  }
   
-  return `...${context}...\n${caretLine}`;
+  // Get the line content for better context
+  const lines = jsonString.split('\n');
+  const errorLine = lines[line - 1] || '';
+  
+  // Get surrounding lines for context
+  const startLine = Math.max(0, line - 2);
+  const endLine = Math.min(lines.length, line + 2);
+  
+  let contextLines = [];
+  for (let i = startLine; i < endLine; i++) {
+    const lineNumber = i + 1;
+    const isErrorLine = lineNumber === line;
+    const prefix = isErrorLine ? '> ' : '  ';
+    contextLines.push(`${prefix}${lineNumber}: ${lines[i] || ''}`);
+    
+    // Add caret pointer under the error line
+    if (isErrorLine) {
+      contextLines.push(`  ${' '.repeat(column + String(line).length + 1)}^`);
+    }
+  }
+  
+  return `at line ${line}, column ${column}:\n${contextLines.join('\n')}`;
 }
 
 /**

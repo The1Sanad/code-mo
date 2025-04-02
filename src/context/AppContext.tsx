@@ -1,23 +1,5 @@
-import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
-
-interface AppContextState {
-  darkMode: boolean;
-  notifications: Notification[];
-}
-
-interface Notification {
-  id: string;
-  type: 'success' | 'error' | 'info';
-  message: string;
-}
-
-interface AppContextValue {
-  state: AppContextState;
-  toggleDarkMode: () => void;
-  addNotification: (type: 'success' | 'error' | 'info', message: string) => void;
-  removeNotification: (id: string) => void;
-  clearNotifications: () => void;
-}
+import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
+import { AppContextState, AppContextValue } from './AppContextTypes';
 
 const AppContext = createContext<AppContextValue | undefined>(undefined);
 
@@ -102,13 +84,17 @@ export function AppProvider({ children }: AppProviderProps) {
     }));
   };
 
-  const value: AppContextValue = {
-    state,
-    toggleDarkMode,
-    addNotification,
-    removeNotification,
-    clearNotifications,
-  };
-
-  return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
+  return (
+    <AppContext.Provider
+      value={{
+        state,
+        toggleDarkMode,
+        addNotification,
+        removeNotification,
+        clearNotifications,
+      }}
+    >
+      {children}
+    </AppContext.Provider>
+  );
 }

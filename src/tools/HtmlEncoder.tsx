@@ -43,7 +43,7 @@ export default function HtmlEncoder() {
       } else {
         setOutput(decodeHtml(input));
       }
-    } catch (err) {
+    } catch {
       setOutput(mode === 'decode' ? 'Invalid HTML-encoded string' : 'Cannot encode this input');
     }
   }, [input, mode]);

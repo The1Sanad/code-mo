@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Clipboard, Trash2, RefreshCw } from 'lucide-react';
+import React, { useState } from 'react';
+import { Clipboard, Trash2 } from 'lucide-react';
 
 export default function HtmlPreview() {
   const [input, setInput] = useState('');

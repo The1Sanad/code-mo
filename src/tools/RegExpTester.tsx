@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Clipboard, Trash2, Copy } from 'lucide-react';
+import { Trash2, Copy } from 'lucide-react';
 
 interface Match {
   text: string;

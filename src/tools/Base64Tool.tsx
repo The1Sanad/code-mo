@@ -30,11 +30,15 @@ export default function Base64Tool() {
         const encoded = btoa(input);
         setOutput(encoded);
       } else {
-        const decoded = atob(input);
-        setOutput(decoded);
+        try {
+          const decoded = atob(input);
+          setOutput(decoded);
+        } catch {
+          setOutput('Invalid Base64 input');
+        }
       }
-    } catch (err) {
-      setOutput(mode === 'decode' ? 'Invalid Base64 input' : 'Cannot encode this input');
+    } catch {
+      setOutput('Cannot encode this input');
     }
   }, [input, mode]);
 

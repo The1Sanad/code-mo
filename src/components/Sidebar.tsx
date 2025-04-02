@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { ChevronRight, ChevronDown, Code, Shield, Zap, Hash, FileText, Database, Terminal, RefreshCw } from 'lucide-react';
+import { useState } from 'react';
+import { ChevronRight, ChevronDown, Code, Shield, Zap, FileText, Terminal, RefreshCw } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
 export const toolCategories = [

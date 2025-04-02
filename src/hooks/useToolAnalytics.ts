@@ -1,5 +1,4 @@
 import { useCallback, useEffect } from 'react';
-import { useAppContext } from '../context/AppContext';
 import { createStorageKey, loadFromStorage, saveToStorage } from '../utils/storage';
 
 interface ToolUsageData {
@@ -21,7 +20,7 @@ interface ToolAnalyticsOptions {
  * @returns Functions for tracking tool usage events
  */
 export function useToolAnalytics(toolName: string, options: ToolAnalyticsOptions = {}) {
-  const { addNotification } = useAppContext();
+  // const { addNotification } = useAppContext();
   const storageKey = createStorageKey('analytics', 'toolUsage');
   
   // Track when the tool was opened

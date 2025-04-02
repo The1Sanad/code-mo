@@ -61,7 +61,7 @@ export async function measureAsyncPerformance<T>(
  * @param delay - The delay in milliseconds
  * @returns A debounced version of the function
  */
-export function debounce<T extends (...args: any[]) => any>(
+export function debounce<T extends (...args: unknown[]) => unknown>(
   fn: T,
   delay = 300
 ): (...args: Parameters<T>) => void {
@@ -84,7 +84,7 @@ export function debounce<T extends (...args: any[]) => any>(
  * @param limit - The limit in milliseconds
  * @returns A throttled version of the function
  */
-export function throttle<T extends (...args: any[]) => any>(
+export function throttle<T extends (...args: unknown[]) => unknown>(
   fn: T,
   limit = 300
 ): (...args: Parameters<T>) => void {
@@ -106,7 +106,7 @@ export function throttle<T extends (...args: any[]) => any>(
  * @param fn - The function to memoize
  * @returns A memoized version of the function
  */
-export function memoize<T extends (...args: any[]) => any>(
+export function memoize<T extends (...args: unknown[]) => unknown>(
   fn: T
 ): (...args: Parameters<T>) => ReturnType<T> {
   const cache = new Map<string, ReturnType<T>>();

@@ -31,9 +31,9 @@ export default function UrlEncoder() {
       } else {
         setOutput(decodeURIComponent(input));
       }
-    } catch (err) {
-      setOutput(mode === 'decode' ? 'Invalid URL-encoded string' : 'Cannot encode this input');
-    }
+     } catch {
+        setOutput(mode === 'decode' ? 'Invalid URL-encoded string' : 'Cannot encode this input');
+      }
   }, [input, mode]);
 
   return (
