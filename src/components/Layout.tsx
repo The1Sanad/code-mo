@@ -4,7 +4,7 @@ import { Outlet, Link, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import Sidebar from './Sidebar';
 import ThemeToggle from './ThemeToggle';
-import { Analytics } from '@vercel/analytics/next';
+import { Analytics } from '@vercel/analytics/react';
 
 export default function Layout() {
   const location = useLocation();
@@ -27,6 +27,7 @@ export default function Layout() {
 
   return (
     <>
+      <Analytics />
       <Helmet>
         <title>{getPageTitle()}</title>
         <meta name="description" content={getPageDescription()} />
@@ -311,5 +312,4 @@ export default function Layout() {
       </div>
     </>
   );
-  <Analytics />
 }
