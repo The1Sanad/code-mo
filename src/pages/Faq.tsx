@@ -21,7 +21,7 @@ export default function Faq() {
     },
     {
       question: "How often are new tools added?",
-      answer: "We regularly add new tools and improve existing ones based on user feedback and needs. Follow our changelog to stay updated."
+      answer: "We regularly add new tools and improve existing ones based on user feedback and needs."
     },
     {
       question: "Are there any usage limits?",

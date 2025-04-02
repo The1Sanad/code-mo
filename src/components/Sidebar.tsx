@@ -121,10 +121,6 @@ export default function Sidebar() {
           Recently Updated
         </h4>
         <p className="text-sm text-gray-400 mb-3">We're constantly adding new tools and improving existing ones.</p>
-        <Link to="/changelog" className="text-sm text-blue-400 hover:text-blue-300 transition flex items-center">
-          <span>View changelog</span>
-          <ChevronRight className="w-4 h-4 ml-1" />
-        </Link>
       </div>
     </div>
   );

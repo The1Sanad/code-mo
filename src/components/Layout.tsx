@@ -61,10 +61,6 @@ export default function Layout() {
                 <CheckCircle className="w-4 h-4 mr-1" />
                 <span>FAQs</span>
               </Link>
-              <Link to="/changelog" className="text-gray-300 hover:text-white transition flex items-center">
-                <Clock className="w-4 h-4 mr-1" />
-                <span>Changelog</span>
-              </Link>
               <a href="https://github.com/yourusername/code-mo" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition flex items-center">
                 <Github className="w-4 h-4 mr-1" />
                 <span>GitHub</span>
@@ -96,7 +92,6 @@ export default function Layout() {
                 <Link to="/tools" className="block text-gray-300 hover:text-white transition py-2" onClick={() => setMobileMenuOpen(false)}>Tools</Link>
                 <Link to="/about" className="block text-gray-300 hover:text-white transition py-2" onClick={() => setMobileMenuOpen(false)}>About</Link>
                 <Link to="/faqs" className="block text-gray-300 hover:text-white transition py-2" onClick={() => setMobileMenuOpen(false)}>FAQs</Link>
-                <Link to="/changelog" className="block text-gray-300 hover:text-white transition py-2" onClick={() => setMobileMenuOpen(false)}>Changelog</Link>
                 <a href="https://github.com/yourusername/code-mo" target="_blank" rel="noopener noreferrer" className="block text-gray-300 hover:text-white transition py-2">GitHub</a>
                 <Link to="/tools" className="block bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg font-medium transition mt-4 text-center" onClick={() => setMobileMenuOpen(false)}>Get Started</Link>
               </div>
@@ -285,7 +280,6 @@ export default function Layout() {
                 <h3 className="font-semibold mb-4 text-lg">Resources</h3>
                 <ul className="space-y-2 text-gray-400">
                   <li><Link to="/faqs" className="hover:text-blue-400 transition">FAQs</Link></li>
-                  <li><Link to="/changelog" className="hover:text-blue-400 transition">Changelog</Link></li>
                   <li><a href="https://github.com/yourusername/code-mo" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition">GitHub Repository</a></li>
                   <li><Link to="/support" className="hover:text-blue-400 transition">Support</Link></li>
                 </ul>
