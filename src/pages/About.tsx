@@ -66,28 +66,7 @@ export default function About() {
                 Code-mo is my collection of developer utilities designed to make everyday coding tasks easier. 
                 Each tool is built with performance and user experience in mind, running entirely in your browser for maximum privacy and convenience.
               </p>
-
-              <h3 className="text-xl font-semibold mt-6 mb-2 text-blue-300">Professional Experience</h3>
-              
-              <div className="mb-4">
-                <h4 className="font-semibold text-blue-400">Solutions Architect</h4>
-                <p className="text-sm text-gray-400 mb-2">Polestar Automotive | 11/2022 – Present</p>
-                <p className="mb-2">Lead architect responsible for the cloud architecture powering Polestar's commerce sales journey, overseeing three technical teams and ensuring optimal AWS implementation across the organization.</p>
-                
-                <p className="text-sm font-medium text-blue-300 mt-2">Key Achievements:</p>
-                <ul className="list-disc pl-5 space-y-1 text-sm">
-                  <li>Architected and implemented scalable cloud solutions for Checkout, Delivery, and Web shop systems, resulting in 50% reduction in time-to-market for new features and 50% increased order intake capacity</li>
-                  <li>Redesigned order management system infrastructure, achieving 20% reduction in infrastructure costs and 30% improvement in system performance</li>
-                  <li>Led the technical design and implementation for North America wholesale market rollout, generating 30% increase in sales and successful market expansion</li>
-                  <li>Established standardized development practices and governance frameworks across teams, significantly improving consistency and development efficiency</li>
-                </ul>
-              </div>
-              
-              <div className="mb-4">
-                <h4 className="font-semibold text-blue-400">Tech Lead</h4>
-                <p className="text-sm text-gray-400 mb-2">Polestar Automotive | 01/2021 – 10/2022</p>
-                <p>Led technical decision-making and team management for cloud services implementation, focusing on AWS serverless architecture and DevOps practices.</p>
-              </div>
+      
 
               <h3 className="text-xl font-semibold mt-6 mb-2 text-blue-300">Technical Skills</h3>
               <div className="flex flex-wrap gap-2">
