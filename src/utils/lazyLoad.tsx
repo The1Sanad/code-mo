@@ -1,2 +1,2 @@
 // Re-export the lazyLoad function from the utils file
-export { lazyLoad } from './lazyLoadUtils';
+export { lazyLoad } from './lazyLoadUtils.tsx';

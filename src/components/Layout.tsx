@@ -63,7 +63,7 @@ export default function Layout() {
                 <CheckCircle className="w-4 h-4 mr-1" />
                 <span>FAQs</span>
               </Link>
-              <a href="https://github.com/yourusername/code-mo" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition flex items-center">
+              <a href="https://github.com/The1Sanad/code-mo" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition flex items-center">
                 <Github className="w-4 h-4 mr-1" />
                 <span>GitHub</span>
               </a>
@@ -282,7 +282,7 @@ export default function Layout() {
                 <h3 className="font-semibold mb-4 text-lg">Resources</h3>
                 <ul className="space-y-2 text-gray-400">
                   <li><Link to="/faqs" className="hover:text-blue-400 transition">FAQs</Link></li>
-                  <li><a href="https://github.com/yourusername/code-mo" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition">GitHub Repository</a></li>
+                  <li><a href="https://github.com/The1Sanad/code-mo" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition">GitHub Repository</a></li>
                   <li><Link to="/support" className="hover:text-blue-400 transition">Support</Link></li>
                 </ul>
               </div>

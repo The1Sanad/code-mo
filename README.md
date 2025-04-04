@@ -1,24 +1,45 @@
 # Code-mo
 
-[![CI/CD Pipeline](https://github.com/user/code-mo/actions/workflows/ci.yml/badge.svg)](https://github.com/user/code-mo/actions/workflows/ci.yml)
+[![CI/CD Pipeline](https://github.com/The1Sanad/code-mo/actions/workflows/ci.yml/badge.svg)](https://github.com/The1Sanad/code-mo/actions/workflows/ci.yml)
 
-A collection of developer tools built with React and TypeScript.
+A collection of developer tools built with React and TypeScript. Code-mo provides various utilities that run entirely in your browser for maximum privacy and convenience.
 
-## Features
+## 📋 Prerequisites
 
-- Various developer utilities and tools
-- Modern React with TypeScript
-- Tailwind CSS for styling
+Before you begin, ensure you have the following installed on your system:
 
-## Development
+- [Node.js](https://nodejs.org/) (v16.x or higher recommended)
+- [Yarn](https://yarnpkg.com/) (v1.22.x or higher)
+
+## 🚀 Getting Started
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/The1Sanad/code-mo.git
+   cd code-mo
+   ```
+
+2. Install dependencies:
+   ```bash
+   yarn install
+   ```
+
+### Development
+
+Start the development server:
 
 ```bash
-# Install dependencies
-yarn install
-
-# Start development server
+# Start development server (default: http://localhost:5173)
 yarn dev
+```
 
+The application will be available at [http://localhost:5173](http://localhost:5173) (or another port if 5173 is in use).
+
+### Building for Production
+
+```bash
 # Build for production
 yarn build
 
@@ -26,7 +47,61 @@ yarn build
 yarn preview
 ```
 
-## Deployment
+### Linting
+
+```bash
+# Run ESLint
+yarn lint
+```
+
+## 🧩 Project Structure
+
+```
+├── .github/          # GitHub Actions workflows
+├── public/           # Static assets
+│   └── images/       # Image assets
+├── src/              # Source code
+│   ├── components/   # Reusable UI components
+│   ├── context/      # React context providers
+│   ├── hooks/        # Custom React hooks
+│   ├── pages/        # Page components
+│   ├── styles/       # Global styles
+│   ├── tools/        # Individual developer tools
+│   └── utils/        # Utility functions
+├── index.html        # HTML entry point
+└── vite.config.ts    # Vite configuration
+```
+
+## ✨ Features
+
+- Various developer utilities and tools
+- Modern React with TypeScript
+- Tailwind CSS for styling
+- Responsive design for desktop and mobile
+- Fast performance with Vite
+
+## 🔧 Troubleshooting
+
+### Common Issues
+
+1. **Port already in use**
+   
+   If port 5173 is already in use, Vite will automatically try the next available port. Check your terminal output for the correct URL.
+
+2. **Dependency issues**
+   
+   If you encounter dependency-related errors, try:
+   ```bash
+   yarn cache clean
+   rm -rf node_modules
+   yarn install
+   ```
+
+3. **Build errors**
+   
+   Make sure you're using a compatible Node.js version. This project works best with Node.js v16 or higher.
+
+## 📦 Deployment
 
 This project uses GitHub Actions for CI/CD. The workflow automatically:
 
@@ -36,6 +111,16 @@ This project uses GitHub Actions for CI/CD. The workflow automatically:
 
 See the [workflow documentation](.github/workflows/README.md) for more details.
 
-## License
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📄 License
 
 MIT
