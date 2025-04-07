@@ -1,5 +1,5 @@
 import React from 'react';
-import { Terminal, Star, Shield, Zap, CheckCircle, Users, Clock, Code, Menu, X, Github, Twitter, Heart, ChevronRight } from 'lucide-react';
+import { Terminal, Star, Shield, Zap, CheckCircle, Users, Code, Menu, X, Github, Twitter, Heart, ChevronRight } from 'lucide-react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import Sidebar from './Sidebar';
@@ -12,17 +12,88 @@ export default function Layout() {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
 
   const getPageTitle = () => {
-    if (showHero) return 'DevUtils - Online Developer Tools & Utilities';
+    if (showHero) return 'Code-mo - Free Online Developer Tools & Utilities';
     const tool = location.pathname.split('/').pop();
-    if (!tool) return 'DevUtils - Tools';
-    return `${tool.charAt(0).toUpperCase() + tool.slice(1)} Tool - DevUtils`;
+    if (!tool) return 'Code-mo - Developer Tools Collection';
+    // Format tool name for better readability in title
+    const formattedTool = tool
+      .split('-')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+    return `${formattedTool} Tool - Free Online Developer Utility | Code-mo`;
   };
 
   const getPageDescription = () => {
-    if (showHero) return 'Free online developer tools including JSON formatter, Base64 encoder, JWT debugger, RegExp tester, and more. All tools run locally in your browser for maximum privacy.';
+    if (showHero) return 'Free online developer tools including JSON formatter, Base64 encoder, JWT debugger, RegExp tester, and more. All tools run locally in your browser for maximum privacy and security.';
     const tool = location.pathname.split('/').pop();
-    if (!tool) return 'Browse our collection of developer tools';
-    return `Online ${tool.charAt(0).toUpperCase() + tool.slice(1)} tool - Free, fast, and secure. Works entirely in your browser.`;
+    if (!tool) return 'Browse our comprehensive collection of free developer tools and utilities designed to make web development faster and easier';
+    
+    // Create more detailed descriptions for each tool
+    const toolDescriptions: {[key: string]: string} = {
+      'json': 'Format, validate and beautify JSON data with our free online JSON formatter tool. Works entirely in your browser for maximum privacy and security.',
+      'base64': 'Encode and decode Base64 strings and files with our free online Base64 conversion tool. No data is sent to servers, ensuring complete privacy.',
+      'jwt': 'Debug and decode JWT (JSON Web Tokens) with our free online JWT debugger tool. Inspect header, payload and signature without sending data to servers.',
+      'regexp': 'Test and debug regular expressions with our free online RegExp tester. Visualize matches and get detailed explanations of your patterns.',
+      'url-encoder': 'Encode and decode URLs with our free online URL encoder/decoder tool. Convert special characters to their URL-safe equivalents instantly.',
+      'html-encoder': 'Encode and decode HTML entities with our free online HTML encoder/decoder tool. Convert special characters to their HTML entity equivalents.',
+      'markdown': 'Create and preview Markdown with our free online Markdown editor. See real-time rendering of your Markdown syntax.',
+      'yaml-json': 'Convert between YAML and JSON formats with our free online converter tool. Instantly transform data between these popular formats.',
+      'sql': 'Format and beautify SQL queries with our free online SQL formatter tool. Make your database queries more readable and maintainable.'
+    };
+    
+    return toolDescriptions[tool] || `Free online ${tool.split('-').join(' ')} tool - Fast, secure, and works entirely in your browser with no server processing. Perfect for developers who value privacy and efficiency.`;
+  };
+
+  // Generate structured data for the current page
+  const getStructuredData = () => {
+    const tool = location.pathname.split('/').pop();
+    
+    // Base structured data for all pages
+    const baseData = {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Code-mo",
+      "url": `https://code-mo.com${location.pathname}`,
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Mohammed Ismaeel"
+      }
+    };
+    
+    // If we're on a tool page, add specific tool information
+    if (tool && location.pathname.includes('/tools/')) {
+      const formattedTool = tool
+        .split('-')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
+      
+      return {
+        ...baseData,
+        "name": `${formattedTool} Tool - Code-mo`,
+        "description": getPageDescription(),
+        "potentialAction": {
+          "@type": "UseAction",
+          "target": `https://code-mo.com${location.pathname}`
+        }
+      };
+    }
+    
+    // For homepage or other pages
+    return {
+      ...baseData,
+      "description": getPageDescription(),
+      "potentialAction": {
+        "@type": "UseAction",
+        "target": "https://code-mo.com"
+      }
+    };
   };
 
   return (
@@ -36,9 +107,14 @@ export default function Layout() {
         <meta property="og:description" content={getPageDescription()} />
         <meta property="og:url" content={`https://code-mo.com${location.pathname}`} />
         <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://code-mo.com/images/code-mo-social.png" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={getPageTitle()} />
         <meta name="twitter:description" content={getPageDescription()} />
+        <meta name="twitter:image" content="https://code-mo.com/images/code-mo-social.png" />
+        <script type="application/ld+json">
+          {JSON.stringify(getStructuredData())}
+        </script>
       </Helmet>
 
       <div className="min-h-screen bg-gray-900 text-white">
@@ -110,7 +186,7 @@ export default function Layout() {
             <div className="container mx-auto px-4 relative z-10">
               <div className="max-w-4xl mx-auto text-center">
                 <div className="inline-block bg-blue-500/10 text-blue-300 px-4 py-1 rounded-full text-sm font-medium mb-6">
-                  17+ Developer Tools • 100% Free • No Sign-up Required
+                  18+ Developer Tools • 100% Free • No Sign-up Required
                 </div>
                 
                 <h1 id="hero-heading" className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-500 to-blue-300 bg-clip-text text-transparent">

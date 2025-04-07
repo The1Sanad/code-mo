@@ -1,0 +1,6 @@
+# robots.txt for Code-mo
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://code-mo.com/sitemap.xml
