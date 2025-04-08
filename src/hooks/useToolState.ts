@@ -14,6 +14,7 @@ export interface ToolState<T> {
 export interface ToolStateActions<T> {
   setData: (data: T) => void;
   startLoading: () => void;
+  setLoading: (isLoading: boolean) => void;
   setError: (error: unknown) => void;
   setSuccess: (message: string) => void;
   clearError: () => void;
@@ -37,6 +38,11 @@ export function useToolState<T>(initialData: T): [ToolState<T>, ToolStateActions
 
   const setData = useCallback((data: T) => {
     setState(prev => ({ ...prev, data }));
+  }, []);
+
+  // Add a new function to set loading state
+  const setLoading = useCallback((isLoading: boolean) => {
+    setState(prev => ({ ...prev, isLoading }));
   }, []);
 
   const startLoading = useCallback(() => {
@@ -108,6 +114,7 @@ export function useToolState<T>(initialData: T): [ToolState<T>, ToolStateActions
   const actions: ToolStateActions<T> = {
     setData,
     startLoading,
+    setLoading,
     setError,
     setSuccess,
     clearError,

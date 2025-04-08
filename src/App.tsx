@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AppProvider } from './context/AppContext';
 import ErrorBoundary from './components/ErrorBoundary';
@@ -31,6 +31,7 @@ const PhpSerializer = lazyLoad(() => import('./tools/PhpSerializer'));
 const TextDiffChecker = lazyLoad(() => import('./tools/TextDiffChecker'));
 const YamlToJson = lazyLoad(() => import('./tools/YamlToJson'));
 const MarkdownEditor = lazyLoad(() => import('./tools/MarkdownEditor'));
+const PromptBuilder = lazyLoad(() => import('./tools/PromptBuilder'));
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
               <Route path="about" element={<About />} />
               <Route path="faqs" element={<Faq />} />
               <Route path="tools">
+                <Route path="prompt-builder" element={<PromptBuilder />} />
                 <Route path="json" element={<JsonFormatter />} />
                 <Route path="base64" element={<Base64Tool />} />
                 <Route path="jwt" element={<JwtDebugger />} />

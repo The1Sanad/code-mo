@@ -69,7 +69,7 @@ export function useToolAnalytics(toolName: string, options: ToolAnalyticsOptions
   // Track successful operations
   const trackSuccess = useCallback((operation: string) => {
     // Could track specific successful operations here
-    console.log(`Tool ${toolName}: ${operation} successful`);
+    // Success logging removed
   }, [toolName]);
   
   // Track errors

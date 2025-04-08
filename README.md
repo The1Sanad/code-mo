@@ -1,15 +1,13 @@
 # Code-mo
 
-[![CI/CD Pipeline](https://github.com/The1Sanad/code-mo/actions/workflows/ci.yml/badge.svg)](https://github.com/The1Sanad/code-mo/actions/workflows/ci.yml)
-
-A collection of developer tools built with React and TypeScript. Code-mo provides various utilities that run entirely in your browser for maximum privacy and convenience.
+A collection of developer tools built with React and TypeScript.
 
 ## 📋 Prerequisites
 
 Before you begin, ensure you have the following installed on your system:
 
 - [Node.js](https://nodejs.org/) (v16.x or higher recommended)
-- [Yarn](https://yarnpkg.com/) (v1.22.x or higher)
+- [Yarn](https://yarnpkg.com/) (v1.22.x or higher) or npm
 
 ## 🚀 Getting Started
 
@@ -24,7 +22,20 @@ Before you begin, ensure you have the following installed on your system:
 2. Install dependencies:
    ```bash
    yarn install
+   # or
+   npm install
    ```
+
+3. Set up environment variables:
+   - Copy the `.env.example` file to `.env`:
+     ```bash
+     cp .env.example .env
+     ```
+   - Edit the `.env` file and add your OpenRouter API key:
+     ```
+     OPENROUTER_API_KEY=your_api_key_here
+     ```
+   - You can get your API key from [OpenRouter](https://openrouter.ai/keys)
 
 ### Development
 
@@ -79,6 +90,34 @@ yarn lint
 - Tailwind CSS for styling
 - Responsive design for desktop and mobile
 - Fast performance with Vite
+- Environment variables for secure API key storage
+
+## 🔐 Environment Variables
+
+This project uses environment variables to securely store API keys and other sensitive information. The following environment variables are used:
+
+- `OPENROUTER_API_KEY`: Your OpenRouter API key for the Prompt Builder tool
+
+You can set these variables in the `.env` file in the root directory of the project. A `.env.example` file is provided as a template.
+
+### Using Environment Variables
+
+1. Copy the `.env.example` file to `.env`:
+   ```bash
+   cp .env.example .env
+   ```
+
+2. Edit the `.env` file and add your actual API keys:
+   ```
+   OPENROUTER_API_KEY=your_actual_api_key_here
+   ```
+
+3. Restart the development server if it's already running
+
+### Security Notes
+
+- The `.env` file is listed in `.gitignore` and should never be committed to version control
+- For production deployments, set environment variables according to your hosting provider's instructions
 
 ## 🔧 Troubleshooting
 

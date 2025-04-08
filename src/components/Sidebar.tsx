@@ -1,8 +1,15 @@
 import { useState } from 'react';
-import { ChevronRight, ChevronDown, Code, Shield, Zap, FileText, Terminal, RefreshCw } from 'lucide-react';
+import { ChevronRight, ChevronDown, Code, Shield, Zap, FileText, Terminal, RefreshCw, Brain } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
 export const toolCategories = [
+  {
+    name: "AI Tools",
+    icon: <Brain className="w-5 h-5 text-blue-500" />,
+    tools: [
+      { name: "Prompt Builder", path: "/tools/prompt-builder" },
+    ]
+  },
   {
     name: "Formatters & Validators",
     icon: <Code className="w-5 h-5 text-blue-500" />,

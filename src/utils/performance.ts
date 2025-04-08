@@ -14,7 +14,7 @@ export function measurePerformance<T>(fn: () => T, label = 'Performance'): T {
   const end = performance.now();
   const duration = end - start;
   
-  console.log(`${label}: ${duration.toFixed(2)}ms`);
+  // Performance logging removed
   
   // Log to performance monitoring if duration exceeds threshold
   if (duration > 100) {
@@ -40,7 +40,7 @@ export async function measureAsyncPerformance<T>(
     const end = performance.now();
     const duration = end - start;
     
-    console.log(`${label}: ${duration.toFixed(2)}ms`);
+    // Performance logging removed
     
     // Log to performance monitoring if duration exceeds threshold
     if (duration > 500) {
@@ -119,7 +119,7 @@ export function memoize<T extends (...args: unknown[]) => unknown>(
     }
     
     const result = fn(...args);
-    cache.set(key, result);
-    return result;
+    cache.set(key, result as ReturnType<T>);
+    return result as ReturnType<T>;
   };
 }
