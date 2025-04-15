@@ -1,25 +1,31 @@
 
-import { Trash2, Copy, Send } from 'lucide-react';
+import { Trash2, Copy, Send, Globe } from 'lucide-react';
 import { useToolState } from '../hooks/useToolState';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import { useToolAnalytics } from '../hooks/useToolAnalytics';
 import { useAppContext } from '../context/AppContext';
 import { createStorageKey } from '../utils/storage';
 import { getOpenRouterApiKey } from '../utils/env';
+import { useState } from 'react';
 
 interface PromptBuilderState {
   output: string;
   isLoading: boolean;
+  detectedLanguage?: string;
 }
 
 export default function PromptBuilder() {
   // Use local storage to persist input between sessions
   const [input, setInput] = useLocalStorage(createStorageKey('prompt-builder', 'input'), '');
   
+  // Track if we're using Arabic mode
+  const [isArabic, setIsArabic] = useState(false);
+  
   // Use our custom hook for managing tool state
   const [state, actions] = useToolState<PromptBuilderState>({
     output: '',
-    isLoading: false
+    isLoading: false,
+    detectedLanguage: undefined
   });
   
   // Get notification function from context
@@ -77,11 +83,11 @@ export default function PromptBuilder() {
           'X-Title': 'Code-mo Prompt Builder'
         },
         body: JSON.stringify({
-          model: 'openai/gpt-3.5-turbo',
+          model: 'meta-llama/llama-4-maverick:free',
           messages: [
             {
               role: 'system',
-              content: 'You are a helpful assistant that converts user input into well-structured, effective prompts. Your task is to take the user\'s input and transform it into a clear, detailed prompt that would get the best results from an AI system.'
+              content: 'You are a helpful assistant that converts user input into well-structured, effective prompts. Your task is to take the user\'s input and transform it into a clear, detailed prompt that would get the best results from an AI system. You should detect the language of the input and respond in the same language. You have excellent support for Arabic language (العربية) and should maintain the same quality for Arabic prompts as you do for English ones.'
             },
             {
               role: 'user',
@@ -99,9 +105,13 @@ export default function PromptBuilder() {
       const data = await response.json();
       const generatedPrompt = data.choices[0]?.message?.content || 'No response generated';
       
+      // Simple language detection - check if the text contains Arabic characters
+      const containsArabic = /[؀-ۿ]/.test(generatedPrompt);
+      
       actions.setData({
         ...state.data,
-        output: generatedPrompt
+        output: generatedPrompt,
+        detectedLanguage: containsArabic ? 'Arabic' : 'English'
       });
       
       // Use the new setLoading function to explicitly set loading state to false
@@ -117,8 +127,16 @@ export default function PromptBuilder() {
   return (
     <div className="bg-gray-900 rounded-lg p-4">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-semibold">AI Prompt Builder</h3>
+        <h3 className="text-lg font-semibold">AI Prompt Builder {isArabic && <span className="mr-2 text-sm text-gray-400">(منشئ الطلبات الذكي)</span>}</h3>
         <div className="flex space-x-2">
+          <button
+            onClick={() => setIsArabic(!isArabic)}
+            className="p-2 text-gray-400 hover:text-white hover:bg-gray-800 rounded-lg transition"
+            aria-label="Toggle Arabic mode"
+            title={isArabic ? "Switch to English" : "Switch to Arabic"}
+          >
+            <Globe className="w-5 h-5" />
+          </button>
           <button
             onClick={handleClear}
             className="p-2 text-gray-400 hover:text-white hover:bg-gray-800 rounded-lg transition"
@@ -134,14 +152,15 @@ export default function PromptBuilder() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <label htmlFor="input" className="block text-sm font-medium text-gray-300 mb-1">
-            Input Text
+            {isArabic ? "النص المدخل" : "Input Text"}
           </label>
           <textarea
             id="input"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Enter your text here to convert it to a prompt..."
-            className="w-full h-64 p-3 bg-gray-800 border border-gray-700 rounded-md text-white placeholder-gray-500 focus:ring-blue-500 focus:border-blue-500"
+            placeholder={isArabic ? "أدخل النص هنا لتحويله إلى طلب منسق..." : "Enter your text here to convert it to a prompt..."}
+            className={`w-full h-64 p-3 bg-gray-800 border border-gray-700 rounded-md text-white placeholder-gray-500 focus:ring-blue-500 focus:border-blue-500 ${isArabic ? 'text-right' : ''}`}
+            dir={isArabic ? "rtl" : "ltr"}
           />
           <div className="mt-2 flex justify-end">
             <button
@@ -157,7 +176,7 @@ export default function PromptBuilder() {
               ) : (
                 <>
                   <Send className="w-4 h-4" />
-                  <span>Generate Prompt</span>
+                  <span>{isArabic ? "إنشاء الطلب" : "Generate Prompt"}</span>
                 </>
               )}
             </button>
@@ -167,7 +186,8 @@ export default function PromptBuilder() {
         <div>
           <div className="flex items-center justify-between mb-1">
             <label htmlFor="output" className="block text-sm font-medium text-gray-300">
-              Generated Prompt
+              {isArabic ? "الطلب المنسق" : "Generated Prompt"}
+              {state.data.detectedLanguage && <span className="ml-2 text-xs text-gray-400">({state.data.detectedLanguage})</span>}
             </label>
             {state.data.output && (
               <button
@@ -182,14 +202,15 @@ export default function PromptBuilder() {
           </div>
           <div 
             id="output"
-            className="w-full h-64 p-3 bg-gray-800 border border-gray-700 rounded-md text-white overflow-auto whitespace-pre-wrap"
+            className={`w-full h-64 p-3 bg-gray-800 border border-gray-700 rounded-md text-white overflow-auto whitespace-pre-wrap ${state.data.detectedLanguage === 'Arabic' ? 'text-right' : ''}`}
+            dir={state.data.detectedLanguage === 'Arabic' ? "rtl" : "ltr"}
           >
             {state.error ? (
               <div className="text-red-400">{state.error}</div>
             ) : state.data.output ? (
               state.data.output
             ) : (
-              <div className="text-gray-500 italic">Generated prompt will appear here...</div>
+              <div className="text-gray-500 italic">{isArabic ? "سيظهر الطلب المنسق هنا..." : "Generated prompt will appear here..."}</div>
             )}
           </div>
         </div>
@@ -210,11 +231,12 @@ export default function PromptBuilder() {
       )}
 
       <div className="mt-6 text-sm text-gray-400">
-        <h4 className="font-medium mb-2">About this tool</h4>
-        <p>
-          This tool helps you convert your text into well-structured prompts for AI systems. 
-          Enter your text, click "Generate Prompt", and get a refined prompt that will help you 
-          get better results from AI models.
+        <h4 className="font-medium mb-2">{isArabic ? "عن هذه الأداة" : "About this tool"}</h4>
+        <p className={isArabic ? 'text-right' : ''} dir={isArabic ? "rtl" : "ltr"}>
+          {isArabic 
+            ? "تساعدك هذه الأداة على تحويل النص إلى طلبات منسقة بشكل جيد لأنظمة الذكاء الاصطناعي. أدخل النص الخاص بك، وانقر على 'إنشاء الطلب'، واحصل على طلب منسق سيساعدك في الحصول على نتائج أفضل من نماذج الذكاء الاصطناعي."
+            : "This tool helps you convert your text into well-structured prompts for AI systems. Enter your text, click \"Generate Prompt\", and get a refined prompt that will help you get better results from AI models."
+          }
         </p>
       </div>
     </div>
