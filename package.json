@@ -28,6 +28,7 @@
     "react-helmet-async": "^2.0.4",
     "react-router-dom": "^6.22.3",
     "sql-formatter": "^15.2.0",
+    "ulid": "^3.0.0",
     "uuid": "^9.0.1",
     "yaml": "^2.4.1"
   },
