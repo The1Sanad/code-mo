@@ -27,6 +27,7 @@ const HashGenerator = lazyLoad(() => import('./tools/HashGenerator'));
 const SqlFormatter = lazyLoad(() => import('./tools/SqlFormatter'));
 const StringCaseConverter = lazyLoad(() => import('./tools/StringCaseConverter'));
 const CronJobParser = lazyLoad(() => import('./tools/CronJobParser'));
+const UrlParser = lazyLoad(() => import('./tools/UrlParser'));
 const PhpSerializer = lazyLoad(() => import('./tools/PhpSerializer'));
 const TextDiffChecker = lazyLoad(() => import('./tools/TextDiffChecker'));
 const YamlToJson = lazyLoad(() => import('./tools/YamlToJson'));
@@ -61,6 +62,7 @@ function App() {
                 <Route path="sql" element={<SqlFormatter />} />
                 <Route path="case" element={<StringCaseConverter />} />
                 <Route path="cron" element={<CronJobParser />} />
+                <Route path="url-parser" element={<UrlParser />} />
                 <Route path="php" element={<PhpSerializer />} />
                 <Route path="diff" element={<TextDiffChecker />} />
                 <Route path="yaml" element={<YamlToJson />} />
