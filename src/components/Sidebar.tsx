@@ -46,6 +46,7 @@ export const toolCategories = [
       { name: "JWT Debugger", path: "/tools/jwt" },
       { name: "RegExp Tester", path: "/tools/regexp" },
       { name: "Cron Job Parser", path: "/tools/cron" },
+      { name: "URL Parser", path: "/tools/url-parser" },
     ]
   },
   {
